@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- !!! БІБЛІОТЕКА ДЛЯ ТЕЛЕФОНІВ (CSS) !!! -->
+    <!-- Бібліотека для телефонів -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
 
     <style>
@@ -34,7 +34,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Елементи інтерфейсу */
+        /* Картки */
         .custom-card {
             background: linear-gradient(145deg, #13161c 0%, #0f1116 100%);
             border: 1px solid #2d323e;
@@ -45,6 +45,12 @@
             transform: translateY(-5px);
         }
 
+        /* Акцентні блоки */
+        .value-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #E13030;
+        }
+
         .price-badge {
             background: rgba(225, 48, 48, 0.15);
             border: 1px solid #E13030;
@@ -52,10 +58,7 @@
             box-shadow: 0 0 20px rgba(225, 48, 48, 0.2);
         }
 
-        /* Ефект світіння ціни */
-        .price-glow {
-            text-shadow: 0 0 20px rgba(225, 48, 48, 0.6);
-        }
+        .price-glow { text-shadow: 0 0 20px rgba(225, 48, 48, 0.6); }
 
         /* Таймер */
         .timer-box {
@@ -63,59 +66,13 @@
             border: 1px dashed #E13030;
             animation: pulse-border 2s infinite;
         }
-        
         @keyframes pulse-border {
-            0% { border-color: #E13030; box-shadow: 0 0 0 0 rgba(225, 48, 48, 0.4); }
-            50% { border-color: #ff6b6b; box-shadow: 0 0 10px 0 rgba(225, 48, 48, 0.1); }
-            100% { border-color: #E13030; box-shadow: 0 0 0 0 rgba(225, 48, 48, 0.4); }
+            0% { border-color: #E13030; }
+            50% { border-color: #ff6b6b; box-shadow: 0 0 15px rgba(225, 48, 48, 0.3); }
+            100% { border-color: #E13030; }
         }
 
-        /* Галерея відгуків */
-        .reviews-scroll {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 1rem;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-        }
-        .reviews-scroll::-webkit-scrollbar { height: 6px; }
-        .reviews-scroll::-webkit-scrollbar-track { background: #13161c; }
-        .reviews-scroll::-webkit-scrollbar-thumb { background: #E13030; border-radius: 10px; }
-        .review-item {
-            flex: 0 0 85%;
-            scroll-snap-align: center;
-        }
-        @media (min-width: 768px) {
-            .review-item { flex: 0 0 40%; }
-        }
-
-        /* Кнопка */
-        .cta-btn {
-            background-color: #E13030;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(225, 48, 48, 0.3);
-            width: 100%; /* На всю ширину форми */
-        }
-        .cta-btn:hover {
-            background-color: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(225, 48, 48, 0.5);
-        }
-
-        .mobile-fixed-btn {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 94%;
-            z-index: 50;
-            background-color: #E13030;
-            box-shadow: 0 5px 20px rgba(225, 48, 48, 0.5);
-        }
-
-        /* --- СТИЛІ ІНПУТІВ (Темні) --- */
+        /* Інпути */
         .custom-input {
             background-color: #1a1d26;
             border: 1px solid #2d323e;
@@ -129,25 +86,53 @@
             outline: none;
         }
 
-        /* Адаптація бібліотеки телефонів під темний фон */
-        .iti { width: 100%; }
-        .iti__country-list {
-            background-color: #1a1d26;
-            border: 1px solid #2d323e;
-            color: white;
+        /* Відгуки */
+        .reviews-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
         }
-        .iti__country.iti__highlight { background-color: #E13030; }
+        .reviews-scroll::-webkit-scrollbar { height: 6px; }
+        .reviews-scroll::-webkit-scrollbar-track { background: #13161c; }
+        .reviews-scroll::-webkit-scrollbar-thumb { background: #E13030; border-radius: 10px; }
+        .review-item { flex: 0 0 85%; scroll-snap-align: center; }
+        @media (min-width: 768px) { .review-item { flex: 0 0 40%; } }
+
+        /* Кнопки */
+        .cta-btn {
+            background-color: #E13030;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(225, 48, 48, 0.3);
+            width: 100%;
+        }
+        .cta-btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(225, 48, 48, 0.5);
+        }
+        .mobile-fixed-btn {
+            position: fixed;
+            bottom: 10px; left: 50%; transform: translateX(-50%); width: 94%; z-index: 50;
+            background-color: #E13030; box-shadow: 0 5px 20px rgba(225, 48, 48, 0.5);
+        }
+
+        /* Intl Tel Input Dark Theme Overrides */
+        .iti { width: 100%; }
+        .iti__country-list { background-color: #1a1d26; border: 1px solid #2d323e; color: white; }
         .iti__tel-input {
             background-color: #1a1d26 !important;
             border: 1px solid #2d323e !important;
             color: white !important;
             border-radius: 0.75rem !important;
-            padding-top: 1rem !important;
-            padding-bottom: 1rem !important;
+            padding-top: 1rem !important; padding-bottom: 1rem !important;
         }
         .iti__tel-input:focus {
             border-color: #E13030 !important;
-            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1) !important;
+            box-shadow: 0 0 0 4px rgba(225, 48, 48, 0.1);
             outline: none !important;
         }
     </style>
@@ -174,76 +159,224 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- HERO SECTION (ОФФЕР) -->
+    <!-- HERO SECTION -->
     <!-- ========================================== -->
     <header class="w-full max-w-4xl px-4 py-12 md:py-20 flex flex-col items-center text-center relative z-10">
         
         <div class="fade-in-up mb-6">
             <span class="price-badge px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest animate-pulse">
-                Спеціальна пропозиція
+                Персональний аудит
             </span>
         </div>
 
         <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight fade-in-up uppercase">
-            Діагностичний <br><span class="text-brand">розбір обличчя</span>
+            Дізнайся всю правду <br>про своє <span class="text-brand">обличчя</span>
         </h1>
 
         <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-8 fade-in-up" style="animation-delay: 0.1s;">
-            20 хвилин, які змінять твій підхід до догляду. Зрозумій справжні причини набряків та зморшок.
+            Перестань діяти навмання. Отримай професійну діагностику та зрозумій, чому твої креми не працюють, а набряки повертаються.
         </p>
 
-        <!-- БЛОК ЦІНИ ТА ТАЙМЕРА -->
+        <!-- Ціна + Таймер -->
         <div class="flex flex-col items-center gap-4 mb-10 fade-in-up" style="animation-delay: 0.2s;">
             <div class="flex items-end gap-4">
                 <span class="text-gray-500 text-2xl line-through decoration-red-500/50 decoration-2">2000 грн</span>
                 <span class="text-6xl font-extrabold text-white price-glow">390 грн</span>
             </div>
             <div class="timer-box px-6 py-2 rounded-xl flex items-center gap-3 mt-2">
-                <span class="text-gray-300 text-xs font-bold uppercase tracking-widest">Ціна зникне через:</span>
+                <span class="text-gray-300 text-xs font-bold uppercase tracking-widest">Ціна згорить через:</span>
                 <span id="countdown" class="text-2xl font-mono font-bold text-brand w-[80px] text-center">20:00</span>
             </div>
         </div>
 
-        <!-- Кнопка ПК (Веде до форми) -->
         <button onclick="scrollToOrder()" class="hidden md:flex cta-btn text-lg font-bold py-5 px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
-            Оформити замовлення <i class="fa-solid fa-angle-down"></i>
+            Забрати розбір за 390 грн <i class="fa-solid fa-angle-right"></i>
         </button>
     </header>
 
     <!-- ========================================== -->
-    <!-- ДЛЯ КОГО (БОЛІ) -->
+    <!-- ПРОБЛЕМА (ЧОМУ ЦЕ ВАЖЛИВО) -->
     <!-- ========================================== -->
-    <section class="w-full max-w-5xl px-4 py-10 relative z-10">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center uppercase">Тобі потрібен цей розбір, якщо:</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="custom-card p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-red-900/20 text-brand rounded-full flex items-center justify-center text-2xl mb-4">
-                    <i class="fa-solid fa-hand-dots"></i>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Не знаєш свій тип</h3>
-                <p class="text-gray-400 text-sm">Купуєш дорогі креми та гаджети, але вони не дають результату.</p>
+    <section class="w-full max-w-4xl px-4 py-10 relative z-10">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase mb-4">
+                Чому ти старієш <span class="text-brand">швидше, ніж могла б?</span>
+            </h2>
+            <p class="text-gray-400">
+                90% дівчат роблять одні й ті самі помилки, які вбивають молодість.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Біль 1 -->
+            <div class="value-card p-6 rounded-r-xl">
+                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
+                    Сліпе копіювання
+                </h3>
+                <p class="text-gray-400 text-sm">
+                    Ти робиш вправи з Instagram, не знаючи, що для твого типу обличчя вони можуть <strong>поглиблювати зморшки</strong>, а не прибирати їх.
+                </p>
             </div>
-            <div class="custom-card p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-red-900/20 text-brand rounded-full flex items-center justify-center text-2xl mb-4">
-                    <i class="fa-solid fa-syringe"></i>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Боїшся "голки"</h3>
-                <p class="text-gray-400 text-sm">Думаєш про ботокс, але боїшся побічних ефектів та "замороженого" обличчя.</p>
+
+            <!-- Біль 2 -->
+            <div class="value-card p-6 rounded-r-xl">
+                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
+                    Боротьба з наслідками
+                </h3>
+                <p class="text-gray-400 text-sm">
+                    Ти мажеш крем на зморшку, а проблема — в затиснутій шиї чи лімфостазі. Без усунення причини — це гроші на вітер.
+                </p>
             </div>
-            <div class="custom-card p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-red-900/20 text-brand rounded-full flex items-center justify-center text-2xl mb-4">
-                    <i class="fa-regular fa-face-frown"></i>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Зморшки повертаються</h3>
-                <p class="text-gray-400 text-sm">Робиш масажі, але заломи та набряки з’являються знову кожного ранку.</p>
+
+            <!-- Біль 3 -->
+            <div class="value-card p-6 rounded-r-xl">
+                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
+                    Страх діяти
+                </h3>
+                <p class="text-gray-400 text-sm">
+                    Ти боїшся нашкодити собі або думаєш про уколи, не знаючи, що <strong>твоє обличчя має ресурс</strong> відновитися самостійно.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- ЕКСПЕРТ -->
+    <!-- ЩО ТАКЕ ДІАГНОСТИКА (СУТЬ ПРОДУКТУ) -->
     <!-- ========================================== -->
-    <section class="w-full bg-dark-card border-y border-dark-border py-16 mt-10">
+    <section class="w-full bg-dark-card border-y border-dark-border py-16 mt-12">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">
+                Що я побачу на твоєму обличчі,<br> <span class="text-brand">чого не бачиш ти?</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Пункт 1 -->
+                <div class="custom-card p-6 rounded-2xl flex gap-4 items-start">
+                    <div class="bg-brand/20 p-3 rounded-lg text-brand text-2xl shrink-0">
+                        <i class="fa-solid fa-skull"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg mb-2">Кісткова структура</h4>
+                        <p class="text-gray-400 text-sm">Визначу твій тип старіння. Від цього залежить, чи "сповзе" обличчя вниз, чи покриється сіткою зморшок.</p>
+                    </div>
+                </div>
+
+                <!-- Пункт 2 -->
+                <div class="custom-card p-6 rounded-2xl flex gap-4 items-start">
+                    <div class="bg-brand/20 p-3 rounded-lg text-brand text-2xl shrink-0">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg mb-2">М'язовий тонус</h4>
+                        <p class="text-gray-400 text-sm">Знайду спазмовані м'язи, які створюють заломи (міжбрівка, носогубка) та атонічні зони, які треба тонізувати.</p>
+                    </div>
+                </div>
+
+                <!-- Пункт 3 -->
+                <div class="custom-card p-6 rounded-2xl flex gap-4 items-start">
+                    <div class="bg-brand/20 p-3 rounded-lg text-brand text-2xl shrink-0">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg mb-2">Стан лімфи</h4>
+                        <p class="text-gray-400 text-sm">Покажу, де саме у тебе застій рідини, який перетворює обличчя на "подушку" зранку.</p>
+                    </div>
+                </div>
+
+                <!-- Пункт 4 -->
+                <div class="custom-card p-6 rounded-2xl flex gap-4 items-start">
+                    <div class="bg-brand/20 p-3 rounded-lg text-brand text-2xl shrink-0">
+                        <i class="fa-solid fa-arrows-left-right-to-line"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-lg mb-2">Асиметрія та постава</h4>
+                        <p class="text-gray-400 text-sm">Знайду зв'язок між твоїм обличчям та тілом. Часто причина другого підборіддя — не зайва вага, а постава.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- НОВИЙ БЛОК: ЩО ВСЕРЕДИНІ (ЗАМІСТЬ ПРОЦЕСУ) -->
+    <!-- ========================================== -->
+    <section class="w-full max-w-4xl px-4 py-16 relative z-10">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-white uppercase mb-3">
+                Що саме ти отримаєш <span class="text-brand">на діагностиці?</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+                Це не просто "консультація". Це глибокий онлайн-розбір твого обличчя, після якого ти перестанеш витрачати гроші на вітер.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            
+            <!-- Пункт 1: Аналіз -->
+            <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden group">
+                <div class="absolute right-0 top-0 text-9xl text-white/5 group-hover:text-brand/10 transition-colors pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <span class="bg-brand text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-[0_0_15px_#E13030]">1</span>
+                    Повний рентген твого стану
+                </h3>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-11">
+                    Я проаналізую кожну зону: чоло, очі, вилиці, овал, шию. Ти дізнаєшся, <strong class="text-white">чому насправді</strong> у тебе нависає повіка або з'явились "брилі". Ми знайдемо першопричину, а не просто наслідок.
+                </p>
+            </div>
+
+            <!-- Пункт 2: Стратегія -->
+            <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden group">
+                <div class="absolute right-0 top-0 text-9xl text-white/5 group-hover:text-brand/10 transition-colors pointer-events-none">
+                    <i class="fa-solid fa-route"></i>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <span class="bg-brand text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-[0_0_15px_#E13030]">2</span>
+                    Стратегія "Анти-гравітація"
+                </h3>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-11">
+                    Ти отримаєш чіткий вектор руху. Я скажу, які процедури (масажі, тейпи, вправи) <strong class="text-white">врятують твоє обличчя</strong>, а які — суворо заборонені саме тобі. Більше жодних експериментів на собі.
+                </p>
+            </div>
+
+            <!-- Пункт 3: План -->
+            <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden group">
+                <div class="absolute right-0 top-0 text-9xl text-white/5 group-hover:text-brand/10 transition-colors pointer-events-none">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <span class="bg-brand text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-[0_0_15px_#E13030]">3</span>
+                    Конкретний план дій
+                </h3>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-11">
+                    Це не абстрактні поради "пити воду". Ти отримаєш <strong class="text-white">покрокову інструкцію</strong>: з чого почати завтрашній ранок, щоб через 30 днів побачити у дзеркалі "мінус 5 років".
+                </p>
+            </div>
+
+        </div>
+        
+        <div class="text-center mt-10">
+            <p class="text-brand font-bold uppercase tracking-widest text-sm animate-pulse mb-4">
+                <i class="fa-solid fa-gift mr-1"></i> Цінність цього розбору — економія тисяч гривень на косметологах
+            </p>
+            <button onclick="scrollToOrder()" class="cta-btn text-lg font-bold py-4 px-10 rounded-full uppercase tracking-wide inline-flex items-center gap-2">
+                Хочу такий розбір <i class="fa-solid fa-arrow-down"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- ЕКСПЕРТ (Світлана) -->
+    <!-- ========================================== -->
+    <section class="w-full bg-dark-card border-y border-dark-border py-16">
         <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
             <div class="w-full md:w-1/2 relative">
                 <div class="relative rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(225,48,48,0.15)] border border-dark-border">
@@ -251,22 +384,23 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0b0d12] to-transparent opacity-80"></div>
                     <div class="absolute bottom-6 left-6">
                         <p class="text-brand text-sm font-bold uppercase tracking-widest mb-1">Експерт</p>
-                        <h3 class="text-3xl font-bold text-white uppercase">Svitlana Havrelyuk</h3>
+                        <h3 class="text-3xl font-bold text-white uppercase">Svitlana Tape</h3>
                     </div>
                 </div>
             </div>
             <div class="w-full md:w-1/2">
                 <h2 class="text-2xl md:text-4xl font-bold text-white mb-6 uppercase leading-snug">
-                    Я точно знаю, <br><span class="text-brand">що потрібно</span> твоєму обличчю
+                    Чому мені <span class="text-brand">довіряють?</span>
                 </h2>
                 <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
                     <p>
-                        Моя суперсила — <strong>діагностика</strong>. Я не даю шаблонних порад. На цій консультації я розкладу твою ситуацію по поличках.
+                        Я не просто "б'юті-блогер". Я практикуючий спеціаліст, який пропустив через свої руки сотні облич.
                     </p>
-                </div>
-                <div class="mt-8 p-4 bg-[#0b0d12] rounded-xl border-l-4 border-brand">
-                    <p class="text-white font-medium italic">
-                        "Ти отримаєш чітке розуміння, чому виникла проблема і покроковий план її вирішення без ін'єкцій."
+                    <p>
+                        Моя філософія: <strong>немає поганої генетики, є відсутність системи.</strong> Я допомогла жінкам у 40+ виглядати краще, ніж у 30, без жодного уколу.
+                    </p>
+                    <p>
+                        На діагностиці я не буду продавати тобі "повітря". Я дам тобі карту твого обличчя, з якою ти точно знатимеш, куди рухатись.
                     </p>
                 </div>
             </div>
@@ -278,7 +412,7 @@
     <!-- ========================================== -->
     <section class="w-full max-w-6xl px-4 py-16">
         <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">
-            Результати дівчат <span class="text-brand">після роботи зі мною</span>
+            Це змінює життя <span class="text-brand">дівчат</span>
         </h2>
         <div class="reviews-scroll">
             <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
@@ -300,7 +434,7 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- БЛОК ЗАМОВЛЕННЯ (ФОРМА) -->
+    <!-- ФОРМА ЗАМОВЛЕННЯ -->
     <!-- ========================================== -->
     <section id="order-section" class="w-full max-w-2xl px-4 pb-24 mx-auto">
         <div class="bg-gradient-to-b from-dark-card to-[#0b0d12] border border-brand/50 rounded-3xl p-6 md:p-10 shadow-[0_0_60px_rgba(225,48,48,0.15)] relative overflow-hidden">
@@ -308,32 +442,27 @@
             <div class="absolute top-0 right-0 w-40 h-40 bg-brand/10 rounded-full blur-3xl"></div>
 
             <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-center uppercase">
-                Заповни форму
+                Забронювати діагностику
             </h2>
             <p class="text-gray-400 mb-8 text-center text-sm">
-                Залиш свої дані, щоб зафіксувати ціну <span class="text-brand font-bold">390 грн</span>
+                Залиш свої дані, щоб зафіксувати ціну <span class="text-brand font-bold">390 грн</span> та отримати інструкції.
             </p>
 
-            <!-- ФОРМА -->
             <form id="order-form" onsubmit="handleOrderSubmit(event)" class="space-y-5">
-                
-                <!-- ПІБ -->
                 <div>
-                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ім'я та Прізвище</label>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">ПІБ</label>
                     <div class="relative">
                         <i class="fa-regular fa-user absolute left-4 top-4 text-gray-500 z-10"></i>
                         <input type="text" name="name" required placeholder="Олена Шевченко" class="custom-input rounded-xl py-4 pl-12 pr-4 focus:outline-none placeholder-gray-600">
                     </div>
                 </div>
 
-                <!-- Телефон (Валідатор) -->
                 <div>
                     <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Телефон</label>
                     <input type="tel" id="phone" name="phone" required class="custom-input rounded-xl py-4 focus:outline-none placeholder-gray-600">
                     <input type="hidden" name="full_phone" id="full_phone">
                 </div>
 
-                <!-- Підсумок ціни -->
                 <div class="bg-[#0b0d12]/50 rounded-xl p-4 border border-white/5 flex justify-between items-center mt-4">
                     <span class="text-gray-400 text-sm">До сплати:</span>
                     <div class="flex items-end gap-2">
@@ -342,24 +471,23 @@
                     </div>
                 </div>
 
-                <!-- Кнопка -->
                 <button type="submit" class="cta-btn text-lg font-bold py-5 rounded-xl uppercase tracking-wide shadow-lg transform active:scale-95 transition-all duration-200">
-                    Купити розбір
+                    Оплатити 390 грн
                 </button>
 
                 <p class="text-xs text-gray-600 text-center">
-                    * Натискаючи кнопку, ви погоджуєтесь з обробкою даних
+                    * Безпечна оплата. Я зв'яжуся з вами відразу після заявки.
                 </p>
             </form>
         </div>
     </section>
 
-    <!-- Мобільна кнопка (скролить до форми) -->
+    <!-- Мобільна кнопка -->
     <button onclick="scrollToOrder()" class="md:hidden mobile-fixed-btn text-white text-lg font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center">
         Оформити за 390 грн
     </button>
 
-    <!-- !!! СКРИПТ БІБЛІОТЕКИ ТЕЛЕФОНІВ !!! -->
+    <!-- Скрипти -->
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 
     <script>
@@ -367,7 +495,6 @@
             document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Таймер
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             setInterval(function () {
@@ -381,36 +508,26 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Таймер 20 хв
             var timeInSeconds = 20 * 60;
             var display = document.querySelector('#countdown');
             startTimer(timeInSeconds, display);
 
-            // --- ВАЛІДАЦІЯ ТЕЛЕФОНУ ---
             const input = document.querySelector("#phone");
             const iti = window.intlTelInput(input, {
                 initialCountry: "auto",
                 geoIpLookup: callback => {
-                    fetch("https://ipapi.co/json")
-                        .then(res => res.json())
-                        .then(data => callback(data.country_code))
-                        .catch(() => callback("ua"));
+                    fetch("https://ipapi.co/json").then(res => res.json()).then(data => callback(data.country_code)).catch(() => callback("ua"));
                 },
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
                 separateDialCode: true, 
             });
 
-            // --- ОБРОБКА ФОРМИ ---
             window.handleOrderSubmit = function(e) {
                 e.preventDefault();
-                
-                // Перевірка телефону
                 if (!iti.isValidNumber()) {
                     alert("Будь ласка, введіть коректний номер телефону");
                     return;
                 }
-
-                // Збереження повного номеру
                 const fullPhone = iti.getNumber();
                 document.getElementById('full_phone').value = fullPhone;
 
@@ -418,9 +535,8 @@
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Обробка...';
 
-                // Імітація відправки (тут можна підключити відправку в телеграм/гугл)
                 setTimeout(() => {
-                    // ПЕРЕНАПРАВЛЕННЯ НА ОПЛАТУ АБО МЕНЕДЖЕРА
+                    // ТУТ ВСТАВИТИ ПОСИЛАННЯ НА ОПЛАТУ АБО МЕНЕДЖЕРА
                     window.location.href = "https://t.me/YOUR_MANAGER_LINK"; 
                 }, 1000);
             };
