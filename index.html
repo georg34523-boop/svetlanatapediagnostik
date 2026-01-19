@@ -34,29 +34,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HERO BACKGROUND (Виправлено) --- */
+        /* --- HERO BACKGROUND --- */
         .hero-section {
-            background-image: url('fonfoto.jpg'); /* Назва твого файлу */
+            background-image: url('fonfoto.jpg');
             background-size: cover;
-            background-position: center top; /* Фокус на верхню частину (обличчя) */
+            background-position: center top; /* Фокус на обличчя зверху */
             background-repeat: no-repeat;
             position: relative;
         }
         
-        /* Затемнення: Прозоріше зверху (щоб видно обличчя), темніше знизу (для тексту) */
+        /* Затемнення для читабельності */
         .hero-overlay {
             background: linear-gradient(
                 to bottom, 
-                rgba(11, 13, 18, 0.3) 0%,   /* Верх: легке затемнення */
-                rgba(11, 13, 18, 0.7) 60%,  /* Середина: середнє */
-                #0b0d12 100%                /* Низ: повний перехід у чорний */
+                rgba(11, 13, 18, 0.2) 0%,   /* Верх: прозоро */
+                rgba(11, 13, 18, 0.8) 60%,  /* Середина: затемнення під текстом */
+                #0b0d12 100%                /* Низ: перехід у фон */
             );
             position: absolute;
             inset: 0;
             z-index: 1;
         }
 
-        /* Контент поверх фото */
         .hero-content {
             position: relative;
             z-index: 10;
@@ -200,7 +199,7 @@
         <div class="hero-overlay"></div>
         
         <!-- Контент -->
-        <div class="hero-content w-full max-w-4xl px-4 py-12 flex flex-col items-center text-center mt-32 md:mt-0">
+        <div class="hero-content w-full max-w-4xl px-4 py-12 flex flex-col items-center text-center mt-40 md:mt-0">
             
             <div class="fade-in-up mb-6">
                 <span class="price-badge px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest animate-pulse">
@@ -229,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- Кнопка ПК -->
+            <!-- Кнопка ПК (виклик модалки) -->
             <button onclick="openModal()" class="hidden md:flex cta-btn text-lg font-bold py-5 px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
                 Забрати розбір за 390 грн <i class="fa-solid fa-angle-right"></i>
             </button>
@@ -237,7 +236,7 @@
     </header>
 
     <!-- ========================================== -->
-    <!-- ВІЗУАЛЬНІ ДОКАЗИ (ДО/ПІСЛЯ - 4 ФОТО) -->
+    <!-- ВІЗУАЛЬНІ ДОКАЗИ (ДО/ПІСЛЯ - 7-10) -->
     <!-- ========================================== -->
     <section class="w-full max-w-6xl px-4 py-12 relative z-10 -mt-10 md:-mt-20">
         <h2 class="text-lg md:text-xl font-bold text-white mb-6 text-center uppercase tracking-widest bg-dark-bg/80 backdrop-blur inline-block px-6 py-2 rounded-full border border-dark-border mx-auto block w-fit">
@@ -247,16 +246,16 @@
         <!-- Скрол контейнер для фото 7, 8, 9, 10 -->
         <div class="reviews-scroll">
             <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews7.jpg" alt="Результат До Після 7" class="w-full h-auto rounded-xl object-contain">
+                <img src="reviews7.jpg" alt="Результат 7" class="w-full h-auto rounded-xl object-contain">
             </div>
             <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews8.jpg" alt="Результат До Після 8" class="w-full h-auto rounded-xl object-contain">
+                <img src="reviews8.jpg" alt="Результат 8" class="w-full h-auto rounded-xl object-contain">
             </div>
             <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews9.jpg" alt="Результат До Після 9" class="w-full h-auto rounded-xl object-contain">
+                <img src="reviews9.jpg" alt="Результат 9" class="w-full h-auto rounded-xl object-contain">
             </div>
             <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews10.jpg" alt="Результат До Після 10" class="w-full h-auto rounded-xl object-contain">
+                <img src="reviews10.jpg" alt="Результат 10" class="w-full h-auto rounded-xl object-contain">
             </div>
         </div>
         
@@ -266,7 +265,7 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- ДЛЯ КОГО (БОЛІ) -->
+    <!-- ДЛЯ КОГО (БОЛІ + УКОЛИ) -->
     <!-- ========================================== -->
     <section class="w-full max-w-5xl px-4 py-16 relative z-10">
         <div class="text-center mb-12">
@@ -279,18 +278,7 @@
         </div>
 
         <div class="space-y-4">
-            <!-- Біль 1 -->
-            <div class="value-card p-6 rounded-r-xl">
-                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
-                    Сліпе копіювання
-                </h3>
-                <p class="text-gray-400 text-sm">
-                    Ти робиш вправи з Instagram, не знаючи, що для твого типу обличчя вони можуть <strong>поглиблювати зморшки</strong>, а не прибирати їх.
-                </p>
-            </div>
-
-            <!-- Біль 2 -->
+            <!-- Біль 1: Уколи -->
             <div class="value-card p-6 rounded-r-xl">
                 <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
                     <i class="fa-solid fa-syringe text-brand"></i>
@@ -298,6 +286,17 @@
                 </h3>
                 <p class="text-gray-400 text-sm">
                     Ти думаєш про ботокс чи філери, але боїшся "обличчя-подушки", набряків та фіброзу. Замість вирішення причини, уколи часто просто "заморожують" проблему, погіршуючи лімфовідтік.
+                </p>
+            </div>
+
+            <!-- Біль 2 -->
+            <div class="value-card p-6 rounded-r-xl">
+                <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
+                    Сліпе копіювання
+                </h3>
+                <p class="text-gray-400 text-sm">
+                    Ти робиш вправи з Instagram, не знаючи, що для твого типу обличчя вони можуть <strong>поглиблювати зморшки</strong>, а не прибирати їх.
                 </p>
             </div>
 
@@ -315,7 +314,7 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- ЦІННІСТЬ (ЩО ВСЕРЕДИНІ) -->
+    <!-- ЦІННІСТЬ (НЕ ДЗВІНОК) -->
     <!-- ========================================== -->
     <section class="w-full bg-dark-card border-y border-dark-border py-16 mt-12">
         <div class="max-w-4xl mx-auto px-4">
@@ -323,7 +322,7 @@
                 Це краще, ніж онлайн-дзвінок
             </h2>
             <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Ми не витрачаємо час на "зв'язок". Я глибоко аналізую твої фото та анкету і записую детальні голосові та відео-повідомлення. Вся інформація залишається у тебе <strong>назавжди</strong>.
+                Ми не витрачаємо час на узгодження графіків. Я глибоко аналізую твої фото та анкету і записую детальні голосові та відео-повідомлення в особисті. Вся інформація залишається у тебе <strong>назавжди</strong>, і ти можеш переслухати її в будь-який момент.
             </p>
 
             <div class="space-y-6">
@@ -403,6 +402,7 @@
             <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">
                 Що кажуть <span class="text-brand">дівчата</span>
             </h2>
+            <!-- Скрол контейнер для 6 відгуків -->
             <div class="reviews-scroll">
                 <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
                     <img src="reviews1.jpg" alt="Відгук 1" class="w-full h-auto rounded-xl object-contain">
@@ -482,7 +482,7 @@
                 Забронювати місце
             </h2>
             <p class="text-gray-400 mb-6 text-center text-xs">
-                Введіть дані для зв'язку та отримання розбору.
+                Введіть дані для отримання розбору.
             </p>
 
             <form id="order-form" onsubmit="handleOrderSubmit(event)" class="space-y-4">
@@ -575,18 +575,4 @@
                 const fullPhone = iti.getNumber();
                 document.getElementById('full_phone').value = fullPhone;
 
-                const btn = e.target.querySelector('button[type="submit"]');
-                const originalText = btn.innerText;
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Обробка...';
-
-                setTimeout(() => {
-                    // ТУТ ВСТАВИТИ ПОСИЛАННЯ НА ОПЛАТУ
-                    window.location.href = "https://t.me/YOUR_MANAGER_LINK"; 
-                }, 1000);
-            };
-        });
-    </script>
-
-</body>
-</html>
+                const btn = e.target.qu
