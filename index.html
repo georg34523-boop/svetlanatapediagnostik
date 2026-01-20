@@ -34,29 +34,27 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HERO BACKGROUND (Виправлено) --- */
+        /* Hero Background */
         .hero-section {
-            background-image: url('fonfoto.jpg'); /* Назва твого файлу */
+            background-image: url('fonfoto.jpg');
             background-size: cover;
-            background-position: center top; /* Фокус на верхню частину (обличчя) */
+            background-position: center top;
             background-repeat: no-repeat;
             position: relative;
         }
         
-        /* Затемнення: Прозоріше зверху (щоб видно обличчя), темніше знизу (для тексту) */
         .hero-overlay {
             background: linear-gradient(
                 to bottom, 
-                rgba(11, 13, 18, 0.3) 0%,   /* Верх: легке затемнення */
-                rgba(11, 13, 18, 0.7) 60%,  /* Середина: середнє */
-                #0b0d12 100%                /* Низ: повний перехід у чорний */
+                rgba(11, 13, 18, 0.3) 0%,
+                rgba(11, 13, 18, 0.7) 60%,
+                #0b0d12 100%
             );
             position: absolute;
             inset: 0;
             z-index: 1;
         }
 
-        /* Контент поверх фото */
         .hero-content {
             position: relative;
             z-index: 10;
@@ -73,7 +71,6 @@
             transform: translateY(-5px);
         }
 
-        /* Акцентні блоки */
         .value-card {
             background: rgba(255, 255, 255, 0.03);
             border-left: 4px solid #E13030;
@@ -115,6 +112,24 @@
             outline: none;
         }
 
+        /* ВАЛІДАЦІЯ ПОМИЛОК (Анімація) */
+        .input-error {
+            border-color: #ff3b3b !important;
+            box-shadow: 0 0 0 4px rgba(255, 59, 59, 0.2) !important;
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .error-message-text {
+            color: #ff3b3b;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
         /* Відгуки (Скрол) */
         .reviews-scroll {
             display: flex;
@@ -143,6 +158,12 @@
             transform: translateY(-2px);
             box-shadow: 0 15px 40px rgba(225, 48, 48, 0.5);
         }
+        .cta-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
         .mobile-fixed-btn {
             position: fixed;
             bottom: 20px; left: 50%; transform: translateX(-50%); width: 94%; z-index: 40;
@@ -152,7 +173,7 @@
         /* MODAL STYLES */
         .modal-overlay {
             background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
         .modal-content {
             background: linear-gradient(145deg, #13161c 0%, #0b0d12 100%);
@@ -193,13 +214,11 @@
 <body class="min-h-screen flex flex-col items-center overflow-x-hidden relative">
 
     <!-- ========================================== -->
-    <!-- HERO SECTION (ФОТОФОН + ОФФЕР) -->
+    <!-- HERO SECTION -->
     <!-- ========================================== -->
     <header class="w-full hero-section flex flex-col items-center justify-center min-h-[90vh] md:min-h-[850px]">
-        <!-- Шар затемнення -->
         <div class="hero-overlay"></div>
         
-        <!-- Контент -->
         <div class="hero-content w-full max-w-4xl px-4 py-12 flex flex-col items-center text-center mt-32 md:mt-0">
             
             <div class="fade-in-up mb-6">
@@ -212,12 +231,11 @@
                 Дізнайся всю правду <br>про своє <span class="text-brand">обличчя</span>
             </h1>
 
+            <!-- ОНОВЛЕНИЙ ТЕКСТ -->
             <p class="text-gray-100 text-lg md:text-xl max-w-2xl mb-8 fade-in-up font-medium drop-shadow-lg" style="animation-delay: 0.1s;">
-                Отримай персональний розбір у зручному форматі (відео-повідомлення в Telegram).
-                Це не дзвінок — я проаналізую тебе глибоко, а вся інформація залишиться з тобою назавжди.
+                Отримай персональну діагностику, на якій я детально розберу твоє обличчя. Ти отримаєш чіткий покроковий план та всі рекомендації, які залишаться з тобою назавжди.
             </p>
 
-            <!-- Ціна + Таймер -->
             <div class="flex flex-col items-center gap-4 mb-10 fade-in-up" style="animation-delay: 0.2s;">
                 <div class="flex items-end gap-4 bg-black/50 px-6 py-3 rounded-2xl backdrop-blur-md border border-white/10 shadow-xl">
                     <span class="text-gray-400 text-2xl line-through decoration-red-500/80 decoration-2">2000 грн</span>
@@ -229,7 +247,6 @@
                 </div>
             </div>
 
-            <!-- Кнопка ПК -->
             <button onclick="openModal()" class="hidden md:flex cta-btn text-lg font-bold py-5 px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
                 Забрати розбір за 390 грн <i class="fa-solid fa-angle-right"></i>
             </button>
@@ -237,14 +254,14 @@
     </header>
 
     <!-- ========================================== -->
-    <!-- ВІЗУАЛЬНІ ДОКАЗИ (ДО/ПІСЛЯ - 4 ФОТО) -->
+    <!-- РЕШТА СЕКЦІЙ -->
     <!-- ========================================== -->
+    
+    <!-- Візуальні докази -->
     <section class="w-full max-w-6xl px-4 py-12 relative z-10 -mt-10 md:-mt-20">
         <h2 class="text-lg md:text-xl font-bold text-white mb-6 text-center uppercase tracking-widest bg-dark-bg/80 backdrop-blur inline-block px-6 py-2 rounded-full border border-dark-border mx-auto block w-fit">
             Ось як змінюються обличчя після діагностики:
         </h2>
-        
-        <!-- Скрол контейнер для фото 7, 8, 9, 10 -->
         <div class="reviews-scroll">
             <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
                 <img src="reviews7.jpg" alt="Результат До Після 7" class="w-full h-auto rounded-xl object-contain">
@@ -259,101 +276,60 @@
                 <img src="reviews10.jpg" alt="Результат До Після 10" class="w-full h-auto rounded-xl object-contain">
             </div>
         </div>
-        
         <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden">
             <i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо
         </p>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ДЛЯ КОГО (БОЛІ) -->
-    <!-- ========================================== -->
+    <!-- Для кого -->
     <section class="w-full max-w-5xl px-4 py-16 relative z-10">
         <div class="text-center mb-12">
             <h2 class="text-2xl md:text-3xl font-bold text-white uppercase mb-4">
                 Чому ти старієш <span class="text-brand">швидше, ніж могла б?</span>
             </h2>
-            <p class="text-gray-400">
-                90% дівчат роблять одні й ті самі помилки, які вбивають молодість.
-            </p>
+            <p class="text-gray-400">90% дівчат роблять одні й ті самі помилки.</p>
         </div>
-
         <div class="space-y-4">
-            <!-- Біль 1 -->
             <div class="value-card p-6 rounded-r-xl">
                 <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-triangle-exclamation text-brand"></i>
-                    Сліпе копіювання
+                    <i class="fa-solid fa-triangle-exclamation text-brand"></i> Сліпе копіювання
                 </h3>
-                <p class="text-gray-400 text-sm">
-                    Ти робиш вправи з Instagram, не знаючи, що для твого типу обличчя вони можуть <strong>поглиблювати зморшки</strong>, а не прибирати їх.
-                </p>
+                <p class="text-gray-400 text-sm">Ти робиш вправи з Instagram, не знаючи, що вони можуть поглиблювати зморшки.</p>
             </div>
-
-            <!-- Біль 2 -->
             <div class="value-card p-6 rounded-r-xl">
                 <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-syringe text-brand"></i>
-                    Уколи краси — пастка
+                    <i class="fa-solid fa-syringe text-brand"></i> Уколи краси — пастка
                 </h3>
-                <p class="text-gray-400 text-sm">
-                    Ти думаєш про ботокс чи філери, але боїшся "обличчя-подушки", набряків та фіброзу. Замість вирішення причини, уколи часто просто "заморожують" проблему, погіршуючи лімфовідтік.
-                </p>
+                <p class="text-gray-400 text-sm">Замість вирішення причини, уколи часто просто "заморожують" проблему та погіршують лімфовідтік.</p>
             </div>
-
-            <!-- Біль 3 -->
             <div class="value-card p-6 rounded-r-xl">
                 <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-hand-holding-dollar text-brand"></i>
-                    Боротьба з наслідками
+                    <i class="fa-solid fa-hand-holding-dollar text-brand"></i> Боротьба з наслідками
                 </h3>
-                <p class="text-gray-400 text-sm">
-                    Ти мажеш крем на зморшку, а проблема — в затиснутій шиї чи лімфостазі. Без усунення причини — це гроші на вітер.
-                </p>
+                <p class="text-gray-400 text-sm">Без усунення причини (затиснута шия, лімфостаз) креми — це гроші на вітер.</p>
             </div>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ЦІННІСТЬ (ЩО ВСЕРЕДИНІ) -->
-    <!-- ========================================== -->
+    <!-- Цінність -->
     <section class="w-full bg-dark-card border-y border-dark-border py-16 mt-12">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 text-center uppercase">
-                Це краще, ніж онлайн-дзвінок
-            </h2>
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 text-center uppercase">Це краще, ніж онлайн-дзвінок</h2>
             <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Ми не витрачаємо час на "зв'язок". Я глибоко аналізую твої фото та анкету і записую детальні голосові та відео-повідомлення. Вся інформація залишається у тебе <strong>назавжди</strong>.
+                Я глибоко аналізую твої фото та анкету і записую детальні голосові та відео-повідомлення.
             </p>
-
             <div class="space-y-6">
-                
                 <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden">
-                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                        <i class="fa-solid fa-dna text-brand"></i>
-                        Повний "рентген" обличчя
-                    </h3>
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">
-                        Чому в одних обличчя "сохне", а в інших — "стікає" вниз (брилі, носогубка)? Я поясню твій тип старіння і покажу приховані причини змін (кістки, м'язи, лімфа).
-                    </p>
+                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-dna text-brand"></i> Повний "рентген" обличчя</h3>
+                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">Я поясню твій тип старіння і покажу приховані причини змін.</p>
                 </div>
-
                 <div class="custom-card p-6 md:p-8 rounded-2xl border-l-4 border-brand relative overflow-hidden">
-                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                        <i class="fa-solid fa-list-check text-brand"></i>
-                        Персональна стратегія
-                    </h3>
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">
-                        Ти отримаєш чіткий план: які техніки (масаж, тейпи) врятують твоє обличчя, а що тобі <strong>категорично заборонено</strong> робити, щоб не нашкодити.
-                    </p>
+                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-list-check text-brand"></i> Персональна стратегія</h3>
+                    <p class="text-gray-300 text-sm md:text-base leading-relaxed pl-8">Ти отримаєш чіткий план: які техніки врятують твоє обличчя, а що заборонено.</p>
                 </div>
-
             </div>
-            
             <div class="text-center mt-10">
-                <p class="text-brand font-bold uppercase tracking-widest text-sm animate-pulse mb-4">
-                    <i class="fa-solid fa-gift mr-1"></i> Цінність цього розбору — економія років помилок та тисяч гривень
-                </p>
+                <p class="text-brand font-bold uppercase tracking-widest text-sm animate-pulse mb-4"><i class="fa-solid fa-gift mr-1"></i> Цінність — економія років помилок</p>
                 <button onclick="openModal()" class="cta-btn text-lg font-bold py-4 px-10 rounded-full uppercase tracking-wide inline-flex items-center gap-2">
                     Хочу такий розбір <i class="fa-solid fa-arrow-down"></i>
                 </button>
@@ -361,9 +337,7 @@
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ЕКСПЕРТ (Світлана) -->
-    <!-- ========================================== -->
+    <!-- Експерт -->
     <section class="w-full max-w-5xl mx-auto px-4 py-16">
         <div class="flex flex-col md:flex-row items-center gap-12">
             <div class="w-full md:w-1/2 relative">
@@ -377,84 +351,43 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2">
-                <h2 class="text-2xl md:text-4xl font-bold text-white mb-6 uppercase leading-snug">
-                    Я бачу не зморшку, <br><span class="text-brand">а причину</span>
-                </h2>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-6 uppercase leading-snug">Я бачу не зморшку, <br><span class="text-brand">а причину</span></h2>
                 <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
-                    <p>
-                        За роки практики я пропрацювала з сотнями облич. Я знаю, що немає "поганої генетики" — є відсутність системи.
-                    </p>
-                    <p>
-                        Багато дівчат приходять до мене зі страхом: "Я боюся щось робити, бо не знаю як". Моє завдання — дати тобі впевненість і карту твого обличчя.
-                    </p>
-                    <p>
-                        Я не даю шаблонних порад. На діагностиці я розберу саме ТВОЮ ситуацію, щоб ти точно знала, куди рухатись.
-                    </p>
+                    <p>За роки практики я пропрацювала з сотнями облич. Я знаю, що немає "поганої генетики" — є відсутність системи.</p>
+                    <p>Моє завдання — дати тобі впевненість і карту твого обличчя.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ТЕКСТОВІ ВІДГУКИ (1-6) -->
-    <!-- ========================================== -->
+    <!-- Відгуки -->
     <section class="w-full bg-dark-card border-y border-dark-border py-16">
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">
-                Що кажуть <span class="text-brand">дівчата</span>
-            </h2>
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">Що кажуть <span class="text-brand">дівчата</span></h2>
             <div class="reviews-scroll">
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews1.jpg" alt="Відгук 1" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews2.jpg" alt="Відгук 2" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews3.jpg" alt="Відгук 3" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews4.jpg" alt="Відгук 4" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews5.jpg" alt="Відгук 5" class="w-full h-auto rounded-xl object-contain">
-                </div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2">
-                    <img src="reviews6.jpg" alt="Відгук 6" class="w-full h-auto rounded-xl object-contain">
-                </div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews1.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews2.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews3.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews4.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews5.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews6.jpg" class="w-full h-auto rounded-xl object-contain"></div>
             </div>
-            <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden">
-                <i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо
-            </p>
+            <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden"><i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо</p>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ГАРАНТІЯ -->
-    <!-- ========================================== -->
+    <!-- Гарантія -->
     <section class="w-full max-w-3xl px-4 mx-auto mt-16 mb-24">
         <div class="bg-dark-card border border-brand/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_30px_rgba(225,48,48,0.1)]">
-            <div class="absolute top-0 right-0 p-4 opacity-10">
-                <i class="fa-solid fa-shield-halved text-8xl text-brand"></i>
-            </div>
-            
+            <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fa-solid fa-shield-halved text-8xl text-brand"></i></div>
             <div class="flex items-start gap-4 relative z-10">
-                <div class="text-brand text-4xl shrink-0">
-                    <i class="fa-solid fa-certificate"></i>
-                </div>
+                <div class="text-brand text-4xl shrink-0"><i class="fa-solid fa-certificate"></i></div>
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2 uppercase">
-                        100% Гарантія повернення
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Я впевнена у якості своєї роботи. Якщо після отримання розбору ви зрозумієте, що це не принесло вам користі — 
-                        <strong class="text-white">я поверну вам усі 390 грн</strong>. Жодних ризиків. Ви або отримаєте результат, або гроші назад.
-                    </p>
+                    <h3 class="text-xl font-bold text-white mb-2 uppercase">100% Гарантія повернення</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Якщо розбір не принесе користі — <strong class="text-white">я поверну вам усі 390 грн</strong>.</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Кнопка виклику форми (внизу сторінки) -->
         <div class="mt-8 text-center">
              <button onclick="openModal()" class="cta-btn text-xl font-bold py-5 px-12 rounded-xl uppercase tracking-wide shadow-lg transform hover:-translate-y-1 transition-all duration-300">
                 Замовити розбір
@@ -462,7 +395,7 @@
         </div>
     </section>
 
-    <!-- Мобільна кнопка (Фіксована) -->
+    <!-- Мобільна кнопка -->
     <button onclick="openModal()" class="md:hidden mobile-fixed-btn text-white text-lg font-bold py-4 rounded-xl uppercase tracking-wide flex justify-center items-center">
         Оформити за 390 грн
     </button>
@@ -478,23 +411,22 @@
                 <i class="fa-solid fa-xmark text-2xl"></i>
             </button>
 
-            <h2 class="text-2xl font-bold text-white mb-2 text-center uppercase">
-                Забронювати місце
-            </h2>
-            <p class="text-gray-400 mb-6 text-center text-xs">
-                Введіть дані для зв'язку та отримання розбору.
-            </p>
+            <h2 class="text-2xl font-bold text-white mb-2 text-center uppercase">Забронювати місце</h2>
+            <p class="text-gray-400 mb-6 text-center text-xs">Введіть дані для зв'язку та отримання розбору.</p>
 
             <form id="order-form" onsubmit="handleOrderSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваше Ім'я</label>
-                    <input type="text" name="name" required placeholder="Олена" class="custom-input rounded-xl py-3 pl-4 pr-4 focus:outline-none placeholder-gray-600">
+                    <input type="text" id="user_name" name="name" placeholder="Олена" class="custom-input rounded-xl py-3 pl-4 pr-4 focus:outline-none placeholder-gray-600">
+                    <p id="error-name" class="error-message-text">Ім'я не може містити цифри</p>
                 </div>
 
                 <div>
                     <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Телефон</label>
-                    <input type="tel" id="phone" name="phone" required class="custom-input rounded-xl py-3 focus:outline-none placeholder-gray-600">
+                    <input type="tel" id="phone" name="phone" class="custom-input rounded-xl py-3 focus:outline-none placeholder-gray-600">
                     <input type="hidden" name="full_phone" id="full_phone">
+                    <input type="hidden" name="country_code" id="country_code">
+                    <p id="error-phone" class="error-message-text">Невірний формат номеру</p>
                 </div>
 
                 <div class="bg-[#0b0d12]/50 rounded-xl p-3 border border-white/5 flex justify-between items-center mt-2">
@@ -503,6 +435,11 @@
                         <span class="text-gray-600 line-through text-xs decoration-red-500/50">2000 грн</span>
                         <span class="text-xl font-bold text-white">390 грн</span>
                     </div>
+                </div>
+
+                <!-- Глобальна помилка над кнопкою -->
+                <div id="global-error" class="hidden bg-red-900/30 border border-red-500/50 rounded-lg p-2 text-center mb-2">
+                    <p class="text-red-400 text-xs font-bold uppercase">Будь ласка, виправте помилки</p>
                 </div>
 
                 <button type="submit" class="cta-btn text-lg font-bold py-4 rounded-xl uppercase tracking-wide shadow-lg w-full mt-2">
@@ -520,18 +457,25 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 
     <script>
+        // ================= CONFIGURATION =================
+        // Встав сюди посилання на Google Script Webhook (яке ти скопіюєш з інструкції вище)
+        const GOOGLE_SCRIPT_URL = 'ТУТ_ТВОЄ_ПОСИЛАННЯ_НА_GOOGLE_SCRIPT'; 
+        
+        // Встав сюди посилання на оплату WayForPay
+        const PAYMENT_URL = 'https://secure.wayforpay.com/button/YOUR_LINK';
+        // =================================================
+
         // Modal Logic
         function openModal() {
             document.getElementById('order-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Disable scroll
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
             document.getElementById('order-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Enable scroll
+            document.body.style.overflow = 'auto'; 
         }
 
-        // Close on clicking outside
         document.getElementById('order-modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
@@ -554,36 +498,95 @@
             var display = document.querySelector('#countdown');
             startTimer(timeInSeconds, display);
 
-            // Phone Validator
+            // Phone Validator Initialization
             const input = document.querySelector("#phone");
             const iti = window.intlTelInput(input, {
                 initialCountry: "auto",
+                // Виключаємо Росію та Білорусь
+                excludeCountries: ["ru", "by"],
+                // Пріоритетні країни (Європа + Україна)
+                preferredCountries: ["ua", "pl", "de", "gb", "fr", "it", "es", "cz", "ro"],
                 geoIpLookup: callback => {
-                    fetch("https://ipapi.co/json").then(res => res.json()).then(data => callback(data.country_code)).catch(() => callback("ua"));
+                    fetch("https://ipapi.co/json")
+                        .then(res => res.json())
+                        .then(data => callback(data.country_code))
+                        .catch(() => callback("ua"));
                 },
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
                 separateDialCode: true, 
             });
 
-            // Form Submit
+            // Form Submit Logic
             window.handleOrderSubmit = function(e) {
                 e.preventDefault();
+                
+                // Елементи форми
+                const nameInput = document.getElementById('user_name');
+                const phoneInput = document.getElementById('phone');
+                const nameError = document.getElementById('error-name');
+                const phoneError = document.getElementById('error-phone');
+                const globalError = document.getElementById('global-error');
+                const btn = e.target.querySelector('button[type="submit"]');
+
+                let isValid = true;
+
+                // Скидання помилок
+                nameInput.classList.remove('input-error');
+                phoneInput.classList.remove('input-error'); 
+                nameError.style.display = 'none';
+                phoneError.style.display = 'none';
+                globalError.classList.add('hidden');
+
+                // 1. Валідація Імені (не має бути цифр)
+                const nameValue = nameInput.value.trim();
+                const hasNumbers = /\d/.test(nameValue);
+                if (!nameValue || hasNumbers) {
+                    nameInput.classList.add('input-error');
+                    nameError.style.display = 'block';
+                    isValid = false;
+                }
+
+                // 2. Валідація Телефону
                 if (!iti.isValidNumber()) {
-                    alert("Будь ласка, введіть коректний номер телефону");
+                    phoneInput.classList.add('input-error');
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                }
+
+                // Якщо є помилки - зупиняємо
+                if (!isValid) {
+                    globalError.classList.remove('hidden');
                     return;
                 }
-                const fullPhone = iti.getNumber();
-                document.getElementById('full_phone').value = fullPhone;
 
-                const btn = e.target.querySelector('button[type="submit"]');
-                const originalText = btn.innerText;
+                // Якщо все ок - готуємо дані
+                const fullPhone = iti.getNumber();
+                const countryData = iti.getSelectedCountryData();
+                document.getElementById('full_phone').value = fullPhone;
+                document.getElementById('country_code').value = countryData.iso2;
+
+                // Блокуємо кнопку
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Обробка...';
 
-                setTimeout(() => {
-                    // ТУТ ВСТАВИТИ ПОСИЛАННЯ НА ОПЛАТУ
-                    window.location.href = "https://t.me/YOUR_MANAGER_LINK"; 
-                }, 1000);
+                // Збираємо FormData
+                const formData = new FormData(document.getElementById('order-form'));
+
+                // Відправка на Google Sheets (mode: 'no-cors' - щоб браузер не блокував запит до іншого домену)
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    body: formData
+                })
+                .then(() => {
+                    // Успішна відправка - перенаправляємо на оплату
+                    window.location.href = PAYMENT_URL;
+                })
+                .catch(err => {
+                    console.error('Error sending data:', err);
+                    // Навіть якщо помилка запису в таблицю, ведемо клієнта на оплату (щоб не втрачати ліда)
+                    window.location.href = PAYMENT_URL;
+                });
             };
         });
     </script>
