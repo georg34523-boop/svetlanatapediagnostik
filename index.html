@@ -219,7 +219,8 @@
     <header class="w-full hero-section flex flex-col items-center justify-center min-h-[90vh] md:min-h-[850px]">
         <div class="hero-overlay"></div>
         
-        <div class="hero-content w-full max-w-4xl px-4 py-12 flex flex-col items-center text-center mt-32 md:mt-0">
+        <!-- ПРАВКА 1: Изменен отступ mt-32 на mt-12 для поднятия текста -->
+        <div class="hero-content w-full max-w-4xl px-4 py-12 flex flex-col items-center text-center mt-12 md:mt-0">
             
             <div class="fade-in-up mb-6">
                 <span class="price-badge px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest animate-pulse">
@@ -246,8 +247,9 @@
                 </div>
             </div>
 
-            <button onclick="openModal()" class="hidden md:flex cta-btn text-lg font-bold py-5 px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
-                Забрати розбір за 390 грн <i class="fa-solid fa-angle-right"></i>
+            <!-- ПРАВКА 2: Кнопка теперь видима всегда (убрано hidden md:flex) -->
+            <button onclick="openModal()" class="flex cta-btn text-lg font-bold py-5 px-12 md:px-16 rounded-full uppercase tracking-wide items-center justify-center gap-3 fade-in-up max-w-sm" style="animation-delay: 0.3s;">
+                Замовити розбір <i class="fa-solid fa-angle-right"></i>
             </button>
         </div>
     </header>
@@ -296,8 +298,9 @@
                 <p class="text-gray-400 text-sm">Ти робиш вправи з Instagram, не знаючи, що вони можуть поглиблювати зморшки.</p>
             </div>
             <div class="value-card p-6 rounded-r-xl">
+                <!-- ПРАВКА 3: Изменено название на "Уколи — пастка" -->
                 <h3 class="font-bold text-lg text-white mb-2 flex items-center gap-3">
-                    <i class="fa-solid fa-syringe text-brand"></i> Уколи краси — пастка
+                    <i class="fa-solid fa-syringe text-brand"></i> Уколи — пастка
                 </h3>
                 <p class="text-gray-400 text-sm">Замість вирішення причини, уколи часто просто "заморожують" проблему та погіршують лімфовідтік.</p>
             </div>
@@ -359,7 +362,6 @@
                     Я бачу не зморшку, <br><span class="text-brand">а причину</span>
                 </h2>
                 
-                <!-- РОЗШИРЕНИЙ ТЕКСТ ТУТ -->
                 <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
                     <p class="font-medium text-white">
                         Привіт, я Світлана — спеціаліст з естетичного тейпування та природного омолодження.
@@ -444,7 +446,7 @@
                     <p id="error-name" class="error-message-text">Ім'я не може містити цифри</p>
                 </div>
 
-                <!-- TELEGRAM (НОВЕ ПОЛЕ) -->
+                <!-- TELEGRAM -->
                 <div>
                     <label class="block text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Ваш Telegram</label>
                     <input type="text" id="user_telegram" name="telegram" placeholder="@username" class="custom-input rounded-xl py-3 pl-4 pr-4 focus:outline-none placeholder-gray-600">
@@ -468,7 +470,6 @@
                     </div>
                 </div>
 
-                <!-- Глобальна помилка -->
                 <div id="global-error" class="hidden bg-red-900/30 border border-red-500/50 rounded-lg p-2 text-center mb-2">
                     <p class="text-red-400 text-xs font-bold uppercase">Будь ласка, виправте помилки</p>
                 </div>
@@ -493,7 +494,6 @@
         const PAYMENT_URL = 'https://secure.wayforpay.com/button/YOUR_LINK';
         // =================================================
 
-        // Modal Logic
         function openModal() {
             document.getElementById('order-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden'; 
@@ -508,7 +508,6 @@
             if (e.target === this) closeModal();
         });
 
-        // Timer Logic
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             setInterval(function () {
@@ -526,7 +525,6 @@
             var display = document.querySelector('#countdown');
             startTimer(timeInSeconds, display);
 
-            // Phone Validator
             const input = document.querySelector("#phone");
             const iti = window.intlTelInput(input, {
                 initialCountry: "auto",
@@ -542,91 +540,64 @@
                 separateDialCode: true, 
             });
 
-            // Form Submit
             window.handleOrderSubmit = function(e) {
                 e.preventDefault();
-                
-                // Fields
                 const nameInput = document.getElementById('user_name');
                 const telegramInput = document.getElementById('user_telegram');
                 const phoneInput = document.getElementById('phone');
-                
-                // Errors
                 const nameError = document.getElementById('error-name');
                 const telegramError = document.getElementById('error-telegram');
                 const phoneError = document.getElementById('error-phone');
                 const globalError = document.getElementById('global-error');
-                
                 const btn = e.target.querySelector('button[type="submit"]');
 
                 let isValid = true;
-
-                // Reset styles
                 [nameInput, telegramInput, phoneInput].forEach(el => el.classList.remove('input-error'));
                 [nameError, telegramError, phoneError].forEach(el => el.style.display = 'none');
                 globalError.classList.add('hidden');
 
-                // 1. Name Validation
                 const nameValue = nameInput.value.trim();
-                const hasNumbers = /\d/.test(nameValue);
-                if (!nameValue || hasNumbers) {
+                if (!nameValue || /\d/.test(nameValue)) {
                     nameInput.classList.add('input-error');
                     nameError.style.display = 'block';
                     isValid = false;
                 }
 
-                // 2. Telegram Validation
                 let telegramValue = telegramInput.value.trim();
                 if (!telegramValue) {
                     telegramInput.classList.add('input-error');
                     telegramError.style.display = 'block';
                     isValid = false;
-                } else {
-                    // Auto-add @ if missing
-                    if (!telegramValue.startsWith('@')) {
-                        telegramValue = '@' + telegramValue;
-                        telegramInput.value = telegramValue; 
-                    }
+                } else if (!telegramValue.startsWith('@')) {
+                    telegramValue = '@' + telegramValue;
+                    telegramInput.value = telegramValue; 
                 }
 
-                // 3. Phone Validation
                 if (!iti.isValidNumber()) {
                     phoneInput.classList.add('input-error');
                     phoneError.style.display = 'block';
                     isValid = false;
                 }
 
-                // Stop if invalid
                 if (!isValid) {
                     globalError.classList.remove('hidden');
                     return;
                 }
 
-                // Prepare Data
-                const fullPhone = iti.getNumber();
-                const countryData = iti.getSelectedCountryData();
-                document.getElementById('full_phone').value = fullPhone;
-                document.getElementById('country_code').value = countryData.iso2;
+                document.getElementById('full_phone').value = iti.getNumber();
+                document.getElementById('country_code').value = iti.getSelectedCountryData().iso2;
 
-                // Button Loading State
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Обробка...';
 
                 const formData = new FormData(document.getElementById('order-form'));
-
-                // Send to Google Sheets
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors', 
                     body: formData
                 })
-                .then(() => {
-                    window.location.href = PAYMENT_URL;
-                })
-                .catch(err => {
-                    console.error('Error sending data:', err);
-                    window.location.href = PAYMENT_URL;
-                });
+                .then(() => { window.location.href = PAYMENT_URL; })
+                .catch(() => { window.location.href = PAYMENT_URL; });
             };
         });
     </script>
