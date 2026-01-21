@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Діагностика обличчя | Svitlana Tape</title>
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID_HERE'); // <-- ЗАМІНИ YOUR_PIXEL_ID_HERE на свій ID
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome -->
@@ -130,20 +147,73 @@
             display: none;
         }
 
-        /* Відгуки (Скрол) */
-        .reviews-scroll {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 1rem;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
+        /* INFINITE SLIDER STYLES */
+        .infinite-slider-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
-        .reviews-scroll::-webkit-scrollbar { height: 6px; }
-        .reviews-scroll::-webkit-scrollbar-track { background: #13161c; }
-        .reviews-scroll::-webkit-scrollbar-thumb { background: #E13030; border-radius: 10px; }
-        .review-item { flex: 0 0 85%; scroll-snap-align: center; }
-        @media (min-width: 768px) { .review-item { flex: 0 0 40%; } }
+        
+        .infinite-slider-track {
+            display: flex;
+            gap: 1rem;
+            transition: transform 0.4s ease;
+        }
+        
+        .infinite-slider-track.no-transition {
+            transition: none;
+        }
+        
+        .slider-item {
+            flex: 0 0 85%;
+            min-width: 85%;
+        }
+        
+        @media (min-width: 768px) {
+            .slider-item {
+                flex: 0 0 40%;
+                min-width: 40%;
+            }
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(225, 48, 48, 0.9);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(225, 48, 48, 0.4);
+        }
+        
+        .slider-nav:hover {
+            background: #b91c1c;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-nav.prev {
+            left: 10px;
+        }
+        
+        .slider-nav.next {
+            right: 10px;
+        }
+        
+        @media (max-width: 767px) {
+            .slider-nav {
+                width: 35px;
+                height: 35px;
+            }
+        }
 
         /* Кнопки */
         .cta-btn {
@@ -262,25 +332,48 @@
     </header>
 
     <!-- ========================================== -->
-    <!-- ДОКАЗИ (Слайдер) -->
+    <!-- ДОКАЗИ (Слайдер) - БЕЗКІНЕЧНИЙ -->
     <!-- ========================================== -->
     <section class="w-full max-w-6xl px-4 py-12 relative z-10 -mt-10 md:-mt-20">
         <h2 class="text-lg md:text-xl font-bold text-white mb-6 text-center uppercase tracking-widest bg-dark-bg/80 backdrop-blur inline-block px-6 py-2 rounded-full border border-dark-border mx-auto block w-fit">
             Ось як змінюються обличчя після діагностики:
         </h2>
-        <div class="reviews-scroll">
-            <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews7.jpg" alt="Результат До Після 7" class="w-full h-auto rounded-xl object-contain">
+        
+        <div class="infinite-slider-container" id="proofs-slider">
+            <button class="slider-nav prev" onclick="slideProofs(-1)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="infinite-slider-track" id="proofs-track">
+                <!-- Оригінальні слайди -->
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews7.jpg" alt="Результат До Після 7" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews8.jpg" alt="Результат До Після 8" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews9.jpg" alt="Результат До Після 9" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews10.jpg" alt="Результат До Після 10" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <!-- НОВІ 4 ФОТО - додай файли з такими назвами -->
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews11.jpg" alt="Результат До Після 11" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews12.jpg" alt="Результат До Після 12" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews13.jpg" alt="Результат До Після 13" class="w-full h-auto rounded-xl object-contain">
+                </div>
+                <div class="slider-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="reviews14.jpg" alt="Результат До Після 14" class="w-full h-auto rounded-xl object-contain">
+                </div>
             </div>
-            <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews8.jpg" alt="Результат До Після 8" class="w-full h-auto rounded-xl object-contain">
-            </div>
-            <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews9.jpg" alt="Результат До Після 9" class="w-full h-auto rounded-xl object-contain">
-            </div>
-            <div class="review-item custom-card p-2 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="reviews10.jpg" alt="Результат До Після 10" class="w-full h-auto rounded-xl object-contain">
-            </div>
+            <button class="slider-nav next" onclick="slideProofs(1)">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
         <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden">
             <i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо
@@ -388,18 +481,27 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- ВІДГУКИ -->
+    <!-- ВІДГУКИ - БЕЗКІНЕЧНИЙ СЛАЙДЕР -->
     <!-- ========================================== -->
     <section class="w-full bg-dark-card border-y border-dark-border py-16">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-2xl md:text-4xl font-bold text-white mb-10 text-center uppercase">Що кажуть <span class="text-brand">дівчата</span></h2>
-            <div class="reviews-scroll">
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews1.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews2.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews3.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews4.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews5.jpg" class="w-full h-auto rounded-xl object-contain"></div>
-                <div class="review-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews6.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+            
+            <div class="infinite-slider-container" id="reviews-slider">
+                <button class="slider-nav prev" onclick="slideReviews(-1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="infinite-slider-track" id="reviews-track">
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews1.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews2.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews3.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews4.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews5.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                    <div class="slider-item custom-card rounded-2xl overflow-hidden p-2"><img src="reviews6.jpg" class="w-full h-auto rounded-xl object-contain"></div>
+                </div>
+                <button class="slider-nav next" onclick="slideReviews(1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
             <p class="text-center text-gray-500 text-xs mt-4 uppercase tracking-widest md:hidden"><i class="fa-solid fa-arrows-left-right mr-2"></i> Гортай вправо</p>
         </div>
@@ -495,8 +597,151 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHekKMuSo4naCZ12hcFtCiQZht6WCmraWFsunM3OUMaRJAp0qWkZdI7JlYvqMcfVUu/exec'; 
         const PAYMENT_URL = 'https://secure.wayforpay.com/button/bd5b067d5896a';
 
-        function openModal() { document.getElementById('order-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function openModal() { 
+            document.getElementById('order-modal').classList.remove('hidden'); 
+            document.body.style.overflow = 'hidden';
+            // Meta Pixel: трекаємо відкриття форми
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout');
+            }
+        }
         function closeModal() { document.getElementById('order-modal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+
+        // ========================================
+        // БЕЗКІНЕЧНИЙ СЛАЙДЕР
+        // ========================================
+        
+        // Слайдер "Докази"
+        let proofsIndex = 0;
+        const proofsTrack = document.getElementById('proofs-track');
+        let proofsSlides;
+        let proofsSlideWidth;
+        let proofsTotalSlides;
+        
+        // Слайдер "Відгуки"
+        let reviewsIndex = 0;
+        const reviewsTrack = document.getElementById('reviews-track');
+        let reviewsSlides;
+        let reviewsSlideWidth;
+        let reviewsTotalSlides;
+        
+        function initSliders() {
+            // Ініціалізація слайдера "Докази"
+            proofsSlides = proofsTrack.querySelectorAll('.slider-item');
+            proofsTotalSlides = proofsSlides.length;
+            
+            // Клонуємо слайди для безкінечності
+            proofsSlides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                proofsTrack.appendChild(clone);
+            });
+            proofsSlides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                proofsTrack.insertBefore(clone, proofsTrack.firstChild);
+            });
+            
+            // Ініціалізація слайдера "Відгуки"
+            reviewsSlides = reviewsTrack.querySelectorAll('.slider-item');
+            reviewsTotalSlides = reviewsSlides.length;
+            
+            // Клонуємо слайди для безкінечності
+            reviewsSlides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                reviewsTrack.appendChild(clone);
+            });
+            reviewsSlides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                reviewsTrack.insertBefore(clone, reviewsTrack.firstChild);
+            });
+            
+            updateSliderDimensions();
+            window.addEventListener('resize', updateSliderDimensions);
+        }
+        
+        function updateSliderDimensions() {
+            // Докази
+            const proofsFirstSlide = proofsTrack.querySelector('.slider-item');
+            if (proofsFirstSlide) {
+                proofsSlideWidth = proofsFirstSlide.offsetWidth + 16; // 16 = gap
+                proofsIndex = proofsTotalSlides;
+                proofsTrack.classList.add('no-transition');
+                proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
+                setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
+            }
+            
+            // Відгуки
+            const reviewsFirstSlide = reviewsTrack.querySelector('.slider-item');
+            if (reviewsFirstSlide) {
+                reviewsSlideWidth = reviewsFirstSlide.offsetWidth + 16;
+                reviewsIndex = reviewsTotalSlides;
+                reviewsTrack.classList.add('no-transition');
+                reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
+                setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
+            }
+        }
+        
+        function slideProofs(direction) {
+            proofsIndex += direction;
+            proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
+            
+            // Перевіряємо чи потрібно "перестрибнути"
+            setTimeout(() => {
+                if (proofsIndex >= proofsTotalSlides * 2) {
+                    proofsTrack.classList.add('no-transition');
+                    proofsIndex = proofsTotalSlides;
+                    proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
+                    setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
+                } else if (proofsIndex < proofsTotalSlides) {
+                    proofsTrack.classList.add('no-transition');
+                    proofsIndex = proofsTotalSlides * 2 - 1;
+                    proofsTrack.style.transform = `translateX(-${proofsIndex * proofsSlideWidth}px)`;
+                    setTimeout(() => proofsTrack.classList.remove('no-transition'), 50);
+                }
+            }, 400);
+        }
+        
+        function slideReviews(direction) {
+            reviewsIndex += direction;
+            reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
+            
+            setTimeout(() => {
+                if (reviewsIndex >= reviewsTotalSlides * 2) {
+                    reviewsTrack.classList.add('no-transition');
+                    reviewsIndex = reviewsTotalSlides;
+                    reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
+                    setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
+                } else if (reviewsIndex < reviewsTotalSlides) {
+                    reviewsTrack.classList.add('no-transition');
+                    reviewsIndex = reviewsTotalSlides * 2 - 1;
+                    reviewsTrack.style.transform = `translateX(-${reviewsIndex * reviewsSlideWidth}px)`;
+                    setTimeout(() => reviewsTrack.classList.remove('no-transition'), 50);
+                }
+            }, 400);
+        }
+        
+        // Підтримка свайпів на мобільних
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.getElementById('proofs-slider').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        document.getElementById('proofs-slider').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) slideProofs(1);
+            if (touchEndX - touchStartX > 50) slideProofs(-1);
+        }, {passive: true});
+        
+        document.getElementById('reviews-slider').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        document.getElementById('reviews-slider').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) slideReviews(1);
+            if (touchEndX - touchStartX > 50) slideReviews(-1);
+        }, {passive: true});
 
         // ПРАВКА: Таймер на 10 хвилин
         function startTimer(duration, display) {
@@ -513,6 +758,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             startTimer(10 * 60, document.querySelector('#countdown'));
+            initSliders();
 
             const input = document.querySelector("#phone");
             const iti = window.intlTelInput(input, {
@@ -543,6 +789,12 @@
 
                 document.getElementById('full_phone').value = iti.getNumber();
                 const formData = new FormData(document.getElementById('order-form'));
+                
+                // Meta Pixel: трекаємо відправку форми
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead');
+                }
+                
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: formData })
                 .then(() => { window.location.href = PAYMENT_URL; })
                 .catch(() => { window.location.href = PAYMENT_URL; });
